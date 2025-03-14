@@ -1,0 +1,34 @@
+esphome:
+  platformio_options:
+    board_build.flash_mode: dio
+    board_build.arduino.memory_type: opi_opi
+    board_upload.maximum_ram_size: 524288
+    build_flags:
+      - '-DBOARD_HAS_PSRAM'
+      - '-DARDUINO_USB_CDC_ON_BOOT=1'
+      - '-mfix-esp32-psram-cache-issue'
+  name: wind_tunnel
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16Mb
+  framework:
+    type: arduino
+logger: {}
+wifi:
+  ssid: POLOFY
+  password: PR0T0FY100
+  power_save_mode: none
+mqtt:
+  broker: 192.168.1.130
+  port: 1883
+  topic_prefix: devices/wind_tunnel
+  username: wind_tunnel
+  password: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IndpbmRfdHVubmVsIiwidHlwZSI6ImRldmljZSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNzQxOTgxMzAwLCJleHAiOjQ4OTc3NDEzMDB9.IVl9Fz14VOboqPMhgK_6VRzOR4rva1nW0xobAPEyg5k
+sensor:
+  platform: adc
+  pin: 9
+  name: delta_pressure
+  id: delta_pressure
+  update_interval: 5s
+  attenuation: auto
